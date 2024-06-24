@@ -1,0 +1,369 @@
+/* Reset de margem e box-sizing */
+* {
+    margin: 0; /* Remove todas as margens padrão */
+    box-sizing: border-box; /* Inclui padding e border no tamanho total do elemento */
+}
+
+/* Body */
+body {
+    font-family: Arial, Helvetica, sans-serif; /* Define a família de fontes */
+    background-color: #111; /* Define a cor de fundo preto */
+}
+
+/* Navbar */
+.nav {
+    position: fixed; /* Fixa no topo */
+    top: 0; /* Alinha ao topo */
+    width: 100%; /* Largura total da tela */
+    display: flex; /* Define o layout como flexível */
+    justify-content: space-between; /* Espaçamento entre logo e avatar */
+    padding: 20px; /* Espaçamento interno */
+    z-index: 1; /* Mantém a navbar sobreposta a outros elementos */
+    transition-timing-function: ease-in; /* Suaviza a transição */
+    transition: all 0.5s; /* Suaviza todas as transições */
+    color: white; /* Define a cor do texto como branco */
+    vertical-align: middle; /* Alinha verticalmente no meio */
+}
+
+/* Avatar na navbar */
+.nav__avatar {
+    width: 30px; /* Largura do avatar */
+    height: 30px; /* Altura do avatar */
+    object-fit: contain; /* Contém a imagem dentro do elemento sem distorção */
+}
+
+/* Cor de fundo preta para a navbar após rolagem */
+.nav__black {
+    background-color: #111; /* Define a cor de fundo preta */
+}
+
+/* Banner */
+.banner {
+    background-image: url('images/wallp.png'); /* Define a imagem de fundo */
+    background-size: cover; /* Cobre toda a área disponível */
+    background-position: center center; /* Centraliza a imagem */
+    color: white; /* Define a cor do texto como branco */
+    object-fit: contain; /* Contém a imagem sem distorção */
+    height: 448px; /* Altura do banner */
+}
+
+.banner__contents {
+    margin-left: 60px; /* Margem à esquerda */
+    padding-top: 120px; /* Preenchimento no topo */
+    height: 220px; /* Altura do conteúdo do banner */
+    max-width: 100%; /* Largura máxima */
+    align-items: center;
+}
+
+/* Título do banner */
+.banner__title {
+    font-size: 3rem; /* Tamanho da fonte */
+    font-weight: 800; /* Peso da fonte */
+    padding-bottom: 0.3rem; /* Preenchimento na parte inferior */
+    color: white; /* Define a cor do texto como branco */
+}
+
+/* Botões do banner */
+.banner__button {
+    cursor: pointer; /* Muda o cursor para indicar clicabilidade */
+    color: #fff; /* Define a cor do texto como branco */
+    outline: none; /* Remove o contorno padrão */
+    border: none; /* Remove a borda padrão */
+    font-weight: 700; /* Peso da fonte */
+    border-radius: 0.2vw; /* Arredonda os cantos */
+    padding-left: 2rem; /* Preenchimento à esquerda */
+    padding-right: 2rem; /* Preenchimento à direita */
+    margin-right: 1rem; /* Margem à direita */
+    padding-top: 0.5rem; /* Preenchimento no topo */
+    padding-bottom: 0.5rem; /* Preenchimento na parte inferior */
+    background-color: rgba(51, 51, 51, 0.5); /* Fundo semitransparente */
+}
+
+/* Efeito hover nos botões do banner */
+.banner__button:hover {
+    color: #000; /* Define a cor do texto como preto */
+    background-color: #e6e6e6; /* Define a cor de fundo ao passar o mouse */
+    transition: all 0.2s; /* Suaviza a transição */
+}
+
+/* Descrição do banner */
+.banner__description {
+    width: 45rem; /* Largura do elemento */
+    line-height: 1.3; /* Altura da linha */
+    padding-top: 1rem; /* Preenchimento no topo */
+    font-size: 1rem; /* Tamanho da fonte */
+    max-width: 360px; /* Largura máxima */
+    height: 180px; /* Altura do elemento */
+}
+
+/* Gradiente no fundo do banner para um efeito fade */
+.banner--fadeBottom {
+    margin-top: 145px; /* Margem no topo */
+    height: 7.4rem; /* Altura do elemento */
+    background-image: linear-gradient(180deg, transparent, rgba(37, 37, 37, 0.61), #111); /* Gradiente de fundo */
+}
+
+/* Seção de filmes */
+.row {
+    color: white; /* Define a cor do texto como branco */
+    margin-left: 20px; /* Margem à esquerda */
+    margin-right: 20px; /* Margem à direita */
+}
+
+/* Container da linha */
+.row__container {
+    position: relative; /* Posicionamento relativo */
+}
+
+/* Botões de navegação */
+.row__button {
+    position: absolute; /* Posicionamento absoluto */
+    top: 0; /* Alinha ao topo */
+    bottom: 0; /* Alinha ao fundo */
+    width: 30px; /* Largura fina */
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+    border: none; /* Remove a borda padrão */
+    color: white; /* Define a cor do texto como branco */
+    font-size: 2rem; /* Tamanho da fonte */
+    cursor: pointer; /* Muda o cursor para indicar clicabilidade */
+    z-index: 2; /* Mantém sobreposto a outros elementos */
+    display: flex; /* Define o layout como flexível */
+    align-items: center; /* Alinha verticalmente no centro */
+    justify-content: center; /* Alinha horizontalmente no centro */
+    opacity: 0; /* Botões invisíveis por padrão */
+    transition: opacity 0.2s; /* Suaviza a transição de visibilidade */
+}
+
+.row__button.left {
+    left: 0; /* Alinha à esquerda */
+}
+
+.row__button.right {
+    right: 0; /* Alinha à direita */
+}
+
+.row__button:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo ao passar o mouse */
+}
+
+/* Exibe os botões ao passar o mouse sobre a linha de pôsteres */
+.row__container:hover .row__button {
+    opacity: 1; /* Torna os botões visíveis */
+}
+
+/* Container das imagens dos filmes */
+.row__posters {
+    display: flex; /* Define o layout como flexível */
+    overflow-y: hidden; /* Esconde rolagem vertical */
+    overflow-x: scroll; /* Permite rolagem horizontal */
+    flex: 1; /* Permite o crescimento flexível */
+    padding: 20px 0; /* Preenchimento vertical */
+    scroll-behavior: smooth; /* Suaviza a rolagem */
+}
+
+/* Remove a barra de rolagem padrão no navegador */
+.row__posters::-webkit-scrollbar {
+    display: none; /* Esconde a barra de rolagem */
+}
+
+/* Imagem dos filmes */
+.row__poster {
+    width: 100%; /* Largura total */
+    object-fit: contain; /* Contém a imagem sem distorção */
+    max-height: 250px; /* Altura máxima */
+    margin-right: 10px; /* Margem à direita */
+    transition: transform 450ms; /* Suaviza o efeito de hover */
+}
+
+/* Efeito hover nas imagens dos filmes */
+.row__poster:hover {
+    transform: scale(1.09); /* Aumenta a escala da imagem */
+}
+
+/* Estilos para o modal */
+.modalCarregarDados {
+    display: none; /* Ocultar por padrão */
+    position: fixed; /* Posicionamento fixo */
+    z-index: 1; /* Mantém sobreposto a outros elementos */
+    left: 0; /* Alinha à esquerda */
+    top: 0; /* Alinha ao topo */
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    overflow: auto; /* Permite rolagem se necessário */
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
+    flex-direction: column; /* Direção flexível em coluna */
+    align-items: center; /* Alinha horizontalmente no centro */
+    justify-content: center; /* Alinha verticalmente no centro */
+    text-align: center; /* Alinha o texto ao centro */
+    padding: 20px; /* Preenchimento interno */
+}
+
+/* Estilos para o modal */
+.modalInserirFilme {
+    display: none; /* Ocultar por padrão */
+    position: fixed; /* Posicionamento fixo */
+    z-index: 1; /* Mantém sobreposto a outros elementos */
+    left: 0; /* Alinha à esquerda */
+    top: 0; /* Alinha ao topo */
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    overflow: auto; /* Permite rolagem se necessário */
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
+    flex-direction: column; /* Direção flexível em coluna */
+    align-items: center; /* Alinha horizontalmente no centro */
+    justify-content: center; /* Alinha verticalmente no centro */
+    text-align: center; /* Alinha o texto ao centro */
+    padding: 20px; /* Preenchimento interno */
+}
+
+/* Conteúdo do modal */
+.modal-content {
+    background-color: #1a1a1a; /* Fundo escuro */
+    margin: 5% auto; /* Margem no topo e auto alinhamento horizontal */
+    padding: 20px; /* Preenchimento interno */
+    border: 1px solid #888; /* Borda */
+    border-radius: 10px; /* Borda arredondada */
+    width: 80%; /* Largura */
+    color: #fff; /* Cor do texto */
+    display: flex; /* Adiciona layout flexível */
+    flex-direction: row; /* Alinha os itens em linha (lado a lado) */
+    justify-content: space-around; /* Espaça os itens igualmente */
+}
+
+.modal-content .content-container {
+    display: flex;
+    flex-direction: column; /* Direção em coluna para os elementos internos */
+    justify-content: flex-start; /* Justifica os elementos ao início (esquerda) */
+    text-align: left; /* Alinha o texto à esquerda */
+    order: 1; /* Garante que a div de conteúdo esteja à direita */
+    /*border: 1px solid yellow;*/
+    font-size: 1.3rem;
+    max-width: 60%;
+    margin: 20px 0; /* Espaçamento abaixo da imagem */
+}
+
+/* Estilos para a imagem dentro do modal */
+.modal-content img {
+    max-height: 400px; /* Altura máxima da imagem */
+    display: block; /* Exibe como bloco para centralização */
+    width: auto; /* Largura automática para manter a proporção */
+    max-width: 100%; /* Largura máxima */
+    margin: 20px 0; /* Espaçamento abaixo da imagem */
+    order: 0; /* Garante que a imagem esteja à esquerda */
+    /*border: 1px solid red;*/
+}
+
+/* Estilos para o título do filme */
+.modal-content h2 {
+    margin: 20px;
+    /*border: 1px solid green;*/
+}
+
+.modal-content input, textarea, select {
+    background-color: #1a1a1a;
+    color: white;
+    border: 1px solid #848080;
+    font-size: 1.2rem;
+    margin-left: 15px;
+    max-width: 500px;
+    resize: none;
+}
+
+#sinopse_modal2{
+    height: 100px;
+    font-size: 1rem;
+    width: 70%;
+}
+
+#data_modal2{
+    color-scheme: dark;
+}
+
+label{
+    padding: 20px;
+    margin-bottom: 20px;
+    color: #bebebe;
+}
+
+#espaco_botao{
+    display: flex;
+    flex-direction: row;
+    padding-left: 20px;
+    padding-top: 10px;
+    justify-content: space-between;
+}
+
+.botao_modal_editar, .botao_modal_confirmar{
+    padding: 10px;
+    background-color: green;
+    border: 1px solid rgb(21, 85, 7);
+    border-radius: 3px;
+}
+
+.botao_modal_editar:hover, .botao_modal_confirmar:hover{
+    background-color: rgb(21, 85, 7);
+    border: 1px solid #848080;
+    cursor:pointer;
+}
+
+.botao_modal_excluir, .botao_modal_limpar{
+    padding: 10px;
+    background-color: #e50914;
+    border: 1px solid gray;
+    border-radius: 3px;
+}
+
+.botao_modal_excluir:hover, .botao_modal_limpar:hover{
+    background-color: #980911;
+    border: 1px solid #848080;
+    cursor:pointer;
+}
+
+/* Botão de fechar do modal */
+.close {
+    color: #aaa; /* Cor do botão de fechar */
+    top: 20px; /* Distância do topo */
+    right: 20px; /* Distância da direita */
+    font-size: 28px; /* Tamanho da fonte */
+    font-weight: bold; /* Peso da fonte */
+    z-index: 1; /* Garante que o botão esteja sobre a imagem */
+    order: 2;
+}
+
+.close:hover,
+.close:focus {
+    color: #fff; /* Cor do botão ao passar o mouse ou focar */
+    text-decoration: none; /* Remove a decoração do texto */
+    cursor: pointer; /* Muda o cursor para indicar clicabilidade */
+}
+
+/* Media query para ajustar o layout em telas menores */
+@media screen and (max-width: 1000px) {
+    .modal-content {
+        padding: 10px; /* Reduz o preenchimento interno */
+    }
+    .modal-content{
+        flex-direction: column; /* Alinha os itens em coluna */
+        align-items: center;
+        padding: 0;
+    }
+    #espaco_botao{
+        padding-left: 0;
+        flex-direction: column;
+        text-align: center;
+    }
+    .botao_modal_editar{
+        margin-bottom: 20px;
+    }
+    label{
+        padding: 0;
+        text-align: left;
+    }
+    .modal-content h2{
+        padding: 0;
+        margin: 0;
+    }
+    hr{
+        margin: 10px 0;
+    }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "easy-collection",
+  "version": "1.0.0",
+  "description": "Projeto da N3 de Front-End, Back-End e BD",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "node src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GabrielMaida/Easy-Collection.git"
+  },
+  "keywords": [
+    "nodejs"
+  ],
+  "author": "Gabriel Antônio",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GabrielMaida/Easy-Collection/issues"
+  },
+  "homepage": "https://github.com/GabrielMaida/Easy-Collection#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "mssql": "^10.0.2"
+  }
+}

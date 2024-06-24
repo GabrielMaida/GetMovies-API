@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Get Movies</title>
+
+</head>
+<body>
+    <!-- Navbar -->
+    <div id="nav" class="nav">
+        <h3>Get Movies</h3>
+        <img class="nav__avatar" src="images/perfil.png" alt="" />
+    </div>
+
+    <!-- Banner -->
+    <header class="banner">
+        <div class="banner__contents">
+            <h1 class="banner__title">Get Movies</h1>
+            <div class="banner__buttons">
+                <button class="banner__button" onclick="abrirModalInserirFilme();">Adicionar Filme</button>
+            </div>
+            <h3 class="banner__description">
+                O seu portal de filmes e séries
+            </h3>
+        </div>
+        <div class="banner--fadeBottom"></div>
+    </header>
+
+    <!-- Próximo Lançamentos -->
+    <div class="row">
+        <h2>Próximos Lançamentos</h2>
+        <div class="row__container">
+            <button class="row__button left">&#9664;</button>
+            <div class="row__posters" id="proximos_filmes"></div>
+            <button class="row__button right">&#9654;</button>
+        </div>
+    </div>
+
+    <!-- Lançados Recentemente -->
+    <div class="row">
+        <h2>Lançados Recentemente</h2>
+        <div class="row__container">
+            <button class="row__button left">&#9664;</button>
+            <div class="row__posters" id="recentes_filmes"></div>
+            <button class="row__button right">&#9654;</button>
+        </div>
+    </div>
+
+    <!-- Filmes de 2023 -->
+    <div class="row">
+        <h2>Filmes de 2023</h2>
+        <div class="row__container">
+            <button class="row__button left">&#9664;</button>
+            <div class="row__posters" id="2023_filmes"></div>
+            <button class="row__button right">&#9654;</button>
+        </div>
+    </div>
+
+    <!-- Todos os Filmes -->
+    <div class="row">
+        <h2>Todos os Filmes</h2>
+        <div class="row__container">
+            <button class="row__button left">&#9664;</button>
+            <div class="row__posters" id="todos_filmes"></div>
+            <button class="row__button right">&#9654;</button>
+        </div>
+    </div>
+
+    <!-- Modal Carregar Dados -->
+    <div id="modalCarregarDados" class="modalCarregarDados">
+        <!-- Modal Conteúdo -->
+        <div class="modal-content">
+            <img id="imagem_modal"/>
+            <div class="content-container">
+                <h2 id="titulo_modal"></h2>
+                <hr>
+                <label><strong>Data de Lançamento:</strong> <span id="data_modal"></span></label>
+                <label><strong>Sinopse:</strong> <span id="sinopse_modal"></span></label>
+                <label><strong>Classificação Indicativa:</strong> <span id="classificacao_modal"></span></label>
+                <div id="espaco_botao"></div>
+            </div>
+            <span class="close" id="closeCarregarDados">&times;</span>
+        </div>
+    </div>
+
+    <!-- Modal Inserir Filme-->
+    <div id="modalInserirFilme" class="modalInserirFilme">
+        <!-- Modal Conteúdo -->
+        <div class="modal-content">
+            <img id="imagem_modal2" src="images/capaprovisoria.jpeg"/>
+            <div class="content-container">
+                <label><strong>Título:</strong><input type="text" id="titulo_modal2"></label>
+                <label><strong>Link da Capa:</strong><input type="text" id="inputImagemModal" onchange="carregarImagemModal();"></label>
+                <hr>
+                <label><strong>Data de Lançamento:</strong> <input type="date" id="data_modal2"></label>
+                <label><strong>Sinopse:</strong> <textarea id="sinopse_modal2" maxlength="500"></textarea></label>
+                <label><strong>Classificação Indicativa:</strong>
+                    <select id="classificacao_modal2">
+                        <option value="7">Classificação Indicativa não definida</option>
+                        <option value="1">Livre para todos os públicos</option>
+                        <option value="2">Não recomendado para menores de 10 anos</option>
+                        <option value="3">Não recomendado para menores de 12 anos</option>
+                        <option value="4">Não recomendado para menores de 14 anos</option>
+                        <option value="5">Não recomendado para menores de 16 anos</option>
+                        <option value="6">Não recomendado para menores de 18 anos</option>
+                    </select>
+                </label>
+                <div id="espaco_botao">
+                    <spam class="botao_modal_confirmar" onclick="adicionarFilme();">Confirmar</spam>
+                    <spam class="botao_modal_limpar" onclick="limparModal();">Limpar</spam>
+                </div>
+            </div>
+            <span class="close" id="closeInserirFilme">&times;</span>
+        </div>
+    </div>
+</body>
+</html>
