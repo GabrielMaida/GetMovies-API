@@ -23,7 +23,7 @@
                 <button class="banner__button" onclick="abrirModalInserirFilme();">Adicionar Filme</button>
             </div>
             <h3 class="banner__description">
-                O seu portal de filmes e séries
+                O seu portal de filmes favorito!
             </h3>
         </div>
         <div class="banner--fadeBottom"></div>
@@ -86,7 +86,7 @@
         </div>
     </div>
 
-    <!-- Modal Inserir Filme-->
+    <!-- Modal Inserir Filme e Alterar Dados-->
     <div id="modalInserirFilme" class="modalInserirFilme">
         <!-- Modal Conteúdo -->
         <div class="modal-content">
@@ -94,9 +94,8 @@
             <div class="content-container">
                 <label><strong>Título:</strong><input type="text" id="titulo_modal2"></label>
                 <label><strong>Link da Capa:</strong><input type="text" id="inputImagemModal" onchange="carregarImagemModal();"></label>
-                <hr>
                 <label><strong>Data de Lançamento:</strong> <input type="date" id="data_modal2"></label>
-                <label><strong>Sinopse:</strong> <textarea id="sinopse_modal2" maxlength="500"></textarea></label>
+                <label class="label_sinopse2"><strong>Sinopse:</strong> <textarea id="sinopse_modal2" maxlength="500"></textarea></label>
                 <label><strong>Classificação Indicativa:</strong>
                     <select id="classificacao_modal2">
                         <option value="7">Classificação Indicativa não definida</option>
@@ -109,7 +108,7 @@
                     </select>
                 </label>
                 <div id="espaco_botao">
-                    <spam class="botao_modal_confirmar" onclick="adicionarFilme();">Confirmar</spam>
+                    <spam class="botao_modal_confirmar" id="botao_modal_confirmar" onclick="adicionarFilme();">Confirmar</spam>
                     <spam class="botao_modal_limpar" onclick="limparModal();">Limpar</spam>
                 </div>
             </div>

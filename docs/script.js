@@ -34,18 +34,19 @@ async function carregarFilmesLista(id_lista){
                 abrirModalCarregarDados(element.id_filme); 
             };
             if (id_lista === 1) {
-                proximos.innerHTML = "";
                 proximos.appendChild(img);
             } else if (id_lista === 2) {
-                recentes.innerHTML = "";
                 recentes.appendChild(img);
             } else if (id_lista === 3) {
-                filmes2023.innerHTML = "";
                 filmes2023.appendChild(img);
             }
         });
     } catch (error){
-        alert("Erro:" + error);
+        if (error == 'TypeError: Failed to fetch') {
+            console.log("Servidor Não Conectado");
+        }else{
+            console.log("Erro inesperado:" + error);
+        }
     }
 }
 
@@ -73,7 +74,11 @@ async function carregarTodosFilmes(){
         });
 
     } catch (error){
-        alert("Erro:" + error);
+        if (error == 'TypeError: Failed to fetch') {
+            alert("Servidor Não Conectado");
+        }else{
+            console.log("Erro inesperado:" + error);
+        }
     }
 }
 
@@ -107,11 +112,33 @@ async function abrirModalCarregarDados(id_selecionado) {
             h2.innerText = filme.nome_filme;
             data.innerText = new Date(filme.data_lancamento).toLocaleDateString(); // Formata a data
             sinopse.innerText = filme.sinopse;
-            classificacao.innerText = filme.id_classificacao;
+            //classificacao.innerText = filme.id_classificacao;
+            switch (filme.id_classificacao) {
+                case 1:
+                    classificacao.innerText = "Livre para todos os públicos";
+                    break;
+                case 2:
+                    classificacao.innerText = "Não recomendado para menores de 10 anos";
+                    break;
+                case 3:
+                    classificacao.innerText = "Não recomendado para menores de 12 anos";
+                    break;
+                case 4:
+                    classificacao.innerText = "Não recomendado para menores de 14 anos";
+                    break;
+                case 5:
+                    classificacao.innerText = "Não recomendado para menores de 16 anos";
+                    break;
+                case 6:
+                    classificacao.innerText = "Não recomendado para menores de 18 anos";
+                    break;
+                case 7:
+                    classificacao.innerText = "Classificação Indicativa não definida";
+            }
             let botao_editar = document.createElement("spam");
             botao_editar.innerText = "Alterar Filme";
             botao_editar.className = "botao_modal_editar";
-            botao_editar.onclick = function(){editarFilme(filme.id_filme);window.location.reload(true);};
+            botao_editar.onclick = function(){abrirModalAlterarFilme(filme.id_filme);};
             espaco_botao.appendChild(botao_editar);
             let botao_excluir = document.createElement("spam");
             botao_excluir.innerText = "Excluir Filme";
@@ -126,18 +153,117 @@ async function abrirModalCarregarDados(id_selecionado) {
     }
 }
 
+async function abrirModalAlterarFilme(id){
+    modalCarregarDados.style.display = "none";
+    modalInserirFilme.style.display = "block";
+
+    carregarAlterarFilme(id);
+}
+
+async function carregarAlterarFilme(id){
+    let titulo = document.getElementById("titulo_modal").innerText;
+    let capa = document.getElementById("imagem_modal").src;
+    let data = document.getElementById("data_modal").innerText;
+    let sinopse = document.getElementById("sinopse_modal").innerText;
+    let classificacao = document.getElementById("classificacao_modal").innerText;
+
+    // Conversão da data para o formato yyyy-MM-dd
+    let partesData = data.split('/');
+    let dataObj = new Date(partesData[2], partesData[1] - 1, partesData[0]);
+    console.log(dataObj);
+    let dataNova = dataObj.toISOString().split('T')[0];
+
+    let titulo2 = document.getElementById("titulo_modal2");
+    let capa2 = document.getElementById("inputImagemModal");
+    let carregarCapa = document.getElementById("imagem_modal2");
+    let data2 = document.getElementById("data_modal2");
+    let sinopse2 = document.getElementById("sinopse_modal2");
+    let classificacao2 = document.getElementById("classificacao_modal2");
+
+    titulo2.value = titulo;
+    capa2.value = capa;
+    carregarCapa.src = capa;
+    data2.value = dataNova;
+    sinopse2.value = sinopse;
+    switch (classificacao) {
+        case "Livre para todos os públicos":
+            classificacao = 1;
+            break;
+        case "Não recomendado para menores de 10 anos":
+            classificacao = 2;
+            break;
+        case "Não recomendado para menores de 12 anos":
+            classificacao = 3;
+            break;
+        case "Não recomendado para menores de 14 anos":
+            classificacao = 4;
+            break;
+        case "Não recomendado para menores de 16 anos":
+            classificacao = 5;
+            break;
+        case "Não recomendado para menores de 18 anos":
+            classificacao = 6;
+            break;
+        case "Classificação Indicativa não definida":
+            classificacao = 7;
+            break;
+    }
+    classificacao2.value = classificacao;
+
+    let botao = document.getElementById("botao_modal_confirmar");
+    botao.onclick = function(){alterarFilme(id, titulo2.value, capa2.value, data2.value, sinopse2.value, classificacao2.value)};
+}
+
+async function alterarFilme(id_selecionado, titulo, capa, data, sinopse, classificacao){
+    try {
+        console.log(capa, data, sinopse, classificacao, titulo, id_selecionado);
+        if (titulo === "" || capa === "" || data === "" || classificacao === "") {
+            alert("Preencha todos os campos!");
+            return;
+        }
+
+        // Adiciona um dia à data
+        let dataObj = new Date(data);
+        dataObj.setDate(dataObj.getDate() + 1);
+        let dataAjustada = dataObj.toISOString().split('T')[0];
+
+        fetch(`${url_filme}/${id_selecionado}`, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id_filme: id_selecionado,
+                nome_filme: titulo,
+                foto_capa: capa,
+                data_lancamento: dataAjustada,
+                sinopse: sinopse,
+                id_classificacao: classificacao
+            })
+        });
+        window.location.reload(true);
+    } catch (error) {
+        console("Erro:" + error);
+    }
+}
+
 async function abrirModalInserirFilme(){
     modalCarregarDados.style.display = "none";
     modalInserirFilme.style.display = "block";
+
+    let capa2 = document.getElementById("imagem_modal2");
+    capa2.src = "images/capaprovisoria.jpeg";
+    limparModal();
 }
 
-function carregarImagemModal(){
+async function carregarImagemModal(){
     let imagem = document.getElementById("imagem_modal2");
     let url = document.getElementById("inputImagemModal").value;
     imagem.src = url;
 }
 
-function limparModal(){
+async function limparModal(){
     let titulo = document.getElementById("titulo_modal2");
     let capa = document.getElementById("inputImagemModal");
     let data = document.getElementById("data_modal2");
@@ -178,7 +304,9 @@ async function adicionarFilme(){
         });
         window.location.reload(true);
     } catch (error) {
-        alert("Erro:" + error);
+        if (error.number == 50001) {
+            alert("Erro:" + error);
+        }
     }
 }
 
@@ -238,3 +366,25 @@ document.querySelectorAll('.row__button').forEach(button => {
     });
 });
 
+
+
+
+/*
+try {
+        fetch(`${url_filme}/${id_selecionado}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(result => {
+            const filme = result[0];
+            titulo.value = filme.nome_filme;
+            capa.value = filme.foto_capa;
+            data.value = new Date(filme.data_lancamento).toLocaleDateString();
+            sinopse.value = filme.sinopse;
+            classificacao.value = filme.id_classificacao;
+        });
+    }
+*/

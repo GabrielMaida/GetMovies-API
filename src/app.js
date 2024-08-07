@@ -2,6 +2,7 @@
 const express = require('express');
 const sql = require('mssql');
 const cors = require('cors');
+const e = require('express');
 
 // Inicialização do express
 const app = express();
@@ -69,10 +70,13 @@ app.get('/api/filme/:id_filme', (req, res) => {
 // Método GET para retornar filmes de uma seleção específica
 app.get('/api/filmes/:id_selecao', (req, res) => {
     const id_selecao = parseInt(req.params.id_selecao);
+    const classificacao = parseInt(req.params.id_classificacao);
+
     if (isNaN(id_selecao) || id_selecao < 1 || id_selecao > 3) {
         res.status(400).json({ error: "id_selecao inválido. Deve ser 1, 2 ou 3." });
         return;
     }
+
     try {
         execSQLQuery(`EXEC listarFilmes ${id_selecao}`, res);
     } catch (error) {
@@ -92,8 +96,16 @@ app.post('/api/filmes', (req, res) => {
             ${req.body.id_classificacao};`, res);
     }
 	catch (error){
-        if(error) {
-            console.log(error);
+        if(error.number == 50001) {
+            console.log("Erro 50001: Já existe um filme com esse nome\n" + error);
+            throw 50001;
+        }
+        else if(error.number == 50002) {
+            console.log("Erro 50002: A classificação indicativa informada não existe\n" + error);
+            throw 50002;
+        }
+        else{
+            console.log("Erro inesperado:\n" + error);
         }
     }
 })
@@ -101,16 +113,20 @@ app.post('/api/filmes', (req, res) => {
 // Método PUT para alterar um filme
 app.put('/api/filme/:id_filme', (req, res) => {
     try{
-        execSQLQuery(`EXEC alterarFilme ${req.params.id_filme},
-                '${req.params.nome_filme}',
-                '${req.params.foto_capa}',
-                '${req.params.data_lancamento}',
-                '${req.params.sinopse}',
-                '${req.params.id_classificacao}';`, res);
+        execSQLQuery(`EXEC alterarFilme ${req.body.id_filme},
+                '${req.body.nome_filme}',
+                '${req.body.foto_capa}',
+                '${req.body.data_lancamento}',
+                '${req.body.sinopse}',
+                '${req.body.id_classificacao}';`, res);
     }
 	catch (error){
-        if(error) {
-            console.log(error);
+        if(error.number == 50001) {
+            console.log("Erro 50001: Já existe um filme com esse nome\n" + error);
+            throw 50001;
+        }
+        else{
+            console.log("Erro inesperado:\n" + error);
         }
     }
 })

@@ -7,7 +7,7 @@
 /* Body */
 body {
     font-family: Arial, Helvetica, sans-serif; /* Define a família de fontes */
-    background-color: #111; /* Define a cor de fundo preto */
+    background-color: #141414; /* Define a cor de fundo preto */
 }
 
 /* Navbar */
@@ -34,7 +34,7 @@ body {
 
 /* Cor de fundo preta para a navbar após rolagem */
 .nav__black {
-    background-color: #111; /* Define a cor de fundo preta */
+    background-color: #141414; /* Define a cor de fundo preta */
 }
 
 /* Banner */
@@ -76,7 +76,7 @@ body {
     margin-right: 1rem; /* Margem à direita */
     padding-top: 0.5rem; /* Preenchimento no topo */
     padding-bottom: 0.5rem; /* Preenchimento na parte inferior */
-    background-color: rgba(51, 51, 51, 0.5); /* Fundo semitransparente */
+    background-color: rgba(14, 14, 14, 0.5); /* Fundo semitransparente */
 }
 
 /* Efeito hover nos botões do banner */
@@ -159,6 +159,8 @@ body {
     flex: 1; /* Permite o crescimento flexível */
     padding: 20px 0; /* Preenchimento vertical */
     scroll-behavior: smooth; /* Suaviza a rolagem */
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 /* Remove a barra de rolagem padrão no navegador */
@@ -168,9 +170,9 @@ body {
 
 /* Imagem dos filmes */
 .row__poster {
-    width: 100%; /* Largura total */
-    object-fit: contain; /* Contém a imagem sem distorção */
-    max-height: 250px; /* Altura máxima */
+    width: 200px; /* Largura total */
+    max-height: 300px; /* Altura máxima */
+    margin-left: 10px;
     margin-right: 10px; /* Margem à direita */
     transition: transform 450ms; /* Suaviza o efeito de hover */
 }
@@ -198,24 +200,6 @@ body {
     padding: 20px; /* Preenchimento interno */
 }
 
-/* Estilos para o modal */
-.modalInserirFilme {
-    display: none; /* Ocultar por padrão */
-    position: fixed; /* Posicionamento fixo */
-    z-index: 1; /* Mantém sobreposto a outros elementos */
-    left: 0; /* Alinha à esquerda */
-    top: 0; /* Alinha ao topo */
-    width: 100%; /* Largura total */
-    height: 100%; /* Altura total */
-    overflow: auto; /* Permite rolagem se necessário */
-    background-color: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
-    flex-direction: column; /* Direção flexível em coluna */
-    align-items: center; /* Alinha horizontalmente no centro */
-    justify-content: center; /* Alinha verticalmente no centro */
-    text-align: center; /* Alinha o texto ao centro */
-    padding: 20px; /* Preenchimento interno */
-}
-
 /* Conteúdo do modal */
 .modal-content {
     background-color: #1a1a1a; /* Fundo escuro */
@@ -223,7 +207,7 @@ body {
     padding: 20px; /* Preenchimento interno */
     border: 1px solid #888; /* Borda */
     border-radius: 10px; /* Borda arredondada */
-    width: 80%; /* Largura */
+    width: 90%; /* Largura */
     color: #fff; /* Cor do texto */
     display: flex; /* Adiciona layout flexível */
     flex-direction: row; /* Alinha os itens em linha (lado a lado) */
@@ -250,7 +234,6 @@ body {
     max-width: 100%; /* Largura máxima */
     margin: 20px 0; /* Espaçamento abaixo da imagem */
     order: 0; /* Garante que a imagem esteja à esquerda */
-    /*border: 1px solid red;*/
 }
 
 /* Estilos para o título do filme */
@@ -264,15 +247,31 @@ body {
     color: white;
     border: 1px solid #848080;
     font-size: 1.2rem;
-    margin-left: 15px;
-    max-width: 500px;
+    margin-top: 10px;
+    width: 100%;
     resize: none;
+}
+
+/* Estilos para o modal */
+.modalInserirFilme {
+    display: none; /* Ocultar por padrão */
+    position: fixed; /* Posicionamento fixo */
+    z-index: 1; /* Mantém sobreposto a outros elementos */
+    left: 0; /* Alinha à esquerda */
+    top: 0; /* Alinha ao topo */
+    height: 100%;
+    width: 100%; /* Largura total */
+    overflow: auto; /* Permite rolagem se necessário */
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
+    flex-direction: column; /* Direção flexível em coluna */
+    align-items: center; /* Alinha horizontalmente no centro */
+    justify-content: center; /* Alinha verticalmente no centro */
+    padding: 20px; /* Preenchimento interno */
 }
 
 #sinopse_modal2{
     height: 100px;
     font-size: 1rem;
-    width: 70%;
 }
 
 #data_modal2{
@@ -280,16 +279,14 @@ body {
 }
 
 label{
-    padding: 20px;
-    margin-bottom: 20px;
+    padding: 10px;
     color: #bebebe;
 }
 
 #espaco_botao{
     display: flex;
     flex-direction: row;
-    padding-left: 20px;
-    padding-top: 10px;
+    padding: 10px 9px;
     justify-content: space-between;
 }
 

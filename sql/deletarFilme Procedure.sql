@@ -19,7 +19,7 @@ BEGIN;
 END;
 
 /*
-    EXEC deletarFilme 16;
+    EXEC deletarFilme 31;
 
     SELECT * FROM filme;
 */
